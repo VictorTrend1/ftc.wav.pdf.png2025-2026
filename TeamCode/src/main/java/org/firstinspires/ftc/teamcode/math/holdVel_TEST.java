@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.PID;
+package org.firstinspires.ftc.teamcode.math;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -17,7 +17,7 @@ public class holdVel_TEST extends LinearOpMode {
     public static double  KD = 0.00012;
 
     public static double  KS = 0.05;
-    public static double  KV = 1.0 / 2800.0;
+    public static double  KV = 1.0 / 2800.0; //AGNOSTICISM
     public static double  KA = 0.0;
 
     public static double  ALPHA    = 0.35;   // velocity filter ( adica 0..1)

@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.PID;
+package org.firstinspires.ftc.teamcode.math;
 
 import com.qualcomm.robotcore.hardware.VoltageSensor;
 
@@ -17,6 +17,7 @@ public class PIDFVelocityController {
     private double velFilt = 0.0;
     private final double alpha;
     private final VoltageSensor battery;
+
 
     public PIDFVelocityController(double kP, double kI, double kD,
                                   double kS, double kV, double kA,
