@@ -1,17 +1,18 @@
 package org.firstinspires.ftc.teamcode.systeme32;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import java.text.BreakIterator;
 
 public class perie {
     DcMotor perie;
-    public void perie_intake(HardwareMap hardwareMap){
+    public perie(HardwareMap hardwareMap){
         perie = hardwareMap.get(DcMotor.class,"Perie");
         perie.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         perie.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        perie.setPower(0);
+        perie.setDirection(DcMotorSimple.Direction.REVERSE);
     }
     public void perie_intake_on(){
         perie.setPower(1);

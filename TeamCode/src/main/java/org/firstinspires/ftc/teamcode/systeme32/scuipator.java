@@ -5,11 +5,11 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 
 public class scuipator {
-    final private DcMotorEx scuipator;
-    final private perie perie = new perie();
+    private final DcMotorEx scuipator;
+    private final perie perie;
 
     private final double target_velocity = 6000;
-    private final double min_velocity = 4000;
+    private final double min_velocity = 1800;
 
     private Launch_state launchState = Launch_state.IDLE;
 
@@ -20,11 +20,12 @@ public class scuipator {
     }
 
     public scuipator(HardwareMap hardwareMap) {
+        perie = new perie(hardwareMap);
+
         scuipator = hardwareMap.get(DcMotorEx.class, "Shooter1");
 
-        PIDFCoefficients pidf = new PIDFCoefficients(300.0, 0.0, 0.0, 12.0);
+        PIDFCoefficients pidf = new PIDFCoefficients(300.0, 0.0, 1.0, 12.0);
         scuipator.setPIDFCoefficients(DcMotorEx.RunMode.RUN_USING_ENCODER, pidf);
-        scuipator.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
     }
 
     public void launch(boolean shotRequested) {
@@ -38,12 +39,12 @@ public class scuipator {
 
             case SPIN_UP:
                 scuipator.setVelocity(target_velocity);
+                
                 if (scuipator.getVelocity() >= min_velocity) {
-                    perie.perie_intake_on();
+                    //perie.perie_intake_on();
                     launchState = Launch_state.LAUCH;
                 }
                 if (!shotRequested) {
-
                     scuipator.setVelocity(0);
                     perie.perie_intake_off();
                     launchState = Launch_state.IDLE;
@@ -52,14 +53,12 @@ public class scuipator {
 
             case LAUCH:
                 scuipator.setVelocity(target_velocity);
-                perie.perie_intake_on();
+                //perie.perie_intake_on();
                 if (!shotRequested) {
-
                     scuipator.setVelocity(0);
                     perie.perie_intake_off();
                     launchState = Launch_state.IDLE;
                 } else if (scuipator.getVelocity() < min_velocity) {
-
                     perie.perie_intake_off();
                     launchState = Launch_state.SPIN_UP;
                 }
